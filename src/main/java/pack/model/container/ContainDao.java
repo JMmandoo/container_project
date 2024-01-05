@@ -24,8 +24,6 @@ public class ContainDao {
       return slist;
    }
 
-   // 민혁
-
    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
    @Value("${C:/Users/cmh17/git/Team/src/main/resources/static/upload}")
