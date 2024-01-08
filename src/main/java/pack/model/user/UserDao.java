@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import jakarta.servlet.http.HttpSession;
 import pack.model.DataMapperInter;
 
-// ************ 광진 ************** // 
 
 @Repository // 퍼시스턴스 레이어, DB나 파일같은 외부 I/O 작업을 처리함, DAO는 DB 서버에 접근하여 SQL문을 실행할 수 있는 객체
 public class UserDao { 
@@ -71,14 +70,14 @@ public class UserDao {
     }
 	    
 	
-	// 사용자 로그인 가능 여부 판단하는 메서드 (광진) 
+	// 사용자 로그인 가능 여부 판단하는 메서드
     // 데이터베이스에서 사용자 로그인 프로세스를 수행하기 위해 호출되는 메서드이다. (user_id와 user_pwd라는 두 개의 문자열 매개변수를 받는다)
     public UserDto userLoginProcess(String user_id, String user_pwd) {
     	// 반환되는 값은 클라이언트가 입력한 아이디와 비밀번호 값이다.
         return dataMapperInter.userLoginProcess(user_id, user_pwd);
     }
     
-    // 사용자 회원수정에 필요한 메서드(광진)
+    // 사용자 회원수정에 필요한 메서드
     public boolean userDataUpdate(UserDto userDto) {
     	// boolean 기본 타입이 false지만 가독성을 위해 추가
     	boolean b = false;
@@ -89,7 +88,7 @@ public class UserDao {
 		return b;  	
     }
     
-    // 회원삭제 (광진)   
+    // 회원삭제
     public boolean userDataDelete(UserDto userDto) {
         boolean b = false; // 초기에 b를 false로 설정      
         // 데이터베이스에서의 삭제 연산을 수행하고 영향을 받은 행의 수를 re 변수에 저장
@@ -103,13 +102,13 @@ public class UserDao {
         return b;
     }
     
-    // 사용자 회원가입시 중복체크 (광진)
+    // 사용자 회원가입시 중복체크
     public int userIdCheck(String user_id) {
     	int result = dataMapperInter.userIdCheck(user_id);
 		return result; // 중복되는 경우 1을 반환하고, 중복되지 않으면 0을 반환
     }
     
-    // 사용자 아이디 찾기 (광진)
+    // 사용자 아이디 찾기
     public UserDto userIdFind(String user_name, String user_email, String user_jumin) {
     	return dataMapperInter.userIdFind(user_name, user_email, user_jumin);
     }

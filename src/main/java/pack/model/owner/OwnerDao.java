@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import pack.model.DataMapperInter;
 
 
-//************ 광진 **************// 
 @Repository
 public class OwnerDao {
 	
