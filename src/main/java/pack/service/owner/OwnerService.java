@@ -1,4 +1,4 @@
-package pack.service.service;
+package pack.service.owner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

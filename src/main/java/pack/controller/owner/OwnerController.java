@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import pack.model.owner.OwnerDto;
-import pack.service.service.OwnerService;
+import pack.service.owner.OwnerService;
 
 @Controller
 public class OwnerController {

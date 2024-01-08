@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
-import pack.model.user.UserDao;
 import pack.model.user.UserDto;
-import pack.service.service.UserService;
+import pack.service.user.UserService;
 
 @Controller
 public class UserController {
