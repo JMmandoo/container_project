@@ -198,9 +198,8 @@
                   map: map,
                   image: markerImage
                });
-
-               markers.push(marker); // makers라는 변수안에 maker를 넣음
-
+               markers.push(marker);
+               
                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
                var content = '<div class="wrap">' +
                   '    <div class="info">' +
@@ -221,11 +220,9 @@
                   '            </div>' +
                   '    </div>' +
                   '</div>';
-
                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
                attachOverlay(marker, content);
             }
-
             // 클러스터러에 마커들을 추가
             clusterer.addMarkers(markers);
          }
