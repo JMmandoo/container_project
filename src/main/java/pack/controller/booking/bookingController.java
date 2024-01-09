@@ -22,61 +22,44 @@ import pack.controller.FormBean;
 import pack.model.admin.AdminBean;
 import pack.model.booking.BookingDao;
 import pack.model.booking.BookingMapperInter;
+import pack.service.booking.BookingService;
 
 
 @Controller
 @RequestMapping("booking")
 public class bookingController {
 	@Autowired
-	private BookingDao dao;
-	
-	//예약 페이지 연결
+	private BookingService bookingService;
+
 	@GetMapping("booking")
 	public String booking() {
 		return "booking/booking";
 	}
-	
 
-		@PostMapping("/bookingDo")
-		public String bookingDo(bookingDTO bookingdto, AdminBean bean) {
-			boolean b = dao.bookingInsert(bookingdto);
-			boolean a = dao.contStatusUpdate(bean);
-			if(b && a) {
-
-				return "redirect:/booking/bookingInfo";			
-			} else {
-				return "/booking/booking";
-			}	
+	@PostMapping("/bookingDo")
+	public String bookingDo(bookingDTO bookingDto, AdminBean bean) {
+		if (bookingService.bookingDo(bookingDto, bean)) {
+			return "redirect:/booking/bookingInfo";
+		} else {
+			return "/booking/booking";
 		}
+	}
 
 	@GetMapping("/bookingInfo")
 	public String bookingProcess(HttpSession session, Model model) {
-		
-		System.out.println("리스트 메소드 시작");
-		
-		String user_id = (String)session.getAttribute("user_id");
-		
-		System.out.println(user_id);
-		
-		ArrayList<bookingDTO> bookingdto = dao.bookingListAll(user_id);
-		System.out.println(bookingdto);
-		
-		session.setAttribute("bookList", bookingdto);
-		
-		model.addAttribute("bList", bookingdto);
+		String userId = (String) session.getAttribute("user_id");
+		ArrayList<bookingDTO> bookingList = bookingService.bookingListAll(userId);
+		model.addAttribute("bList", bookingList);
 		return "booking/bookingInfo";
-		
-		
 	}
 
-	//예약삭제
 	@GetMapping("bookDelete")
-	public String bookDelete(bookingDTO bookingDto, Model model, HttpSession session){
-		boolean b = dao.bookingDelete(bookingDto);
-		if(b) {
+	public String bookDelete(@RequestParam("bookingId") int bookingId, Model model, HttpSession session) {
+		bookingDTO bookingDto = new bookingDTO(); // bookingDTO에 필요한 정보 설정
+		if (bookingService.bookDelete(bookingDto)) {
 			return "booking/booking";
-		}else
-		return "redirect:bookingInfo";
+		} else {
+			return "redirect:bookingInfo";
+		}
 	}
-
 }
