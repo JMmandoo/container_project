@@ -242,16 +242,6 @@ public class ContainerController {
 	      }
 	   }
 
-	   
-//	@GetMapping("/booked")
-//	public String conBooked(@RequestParam("cont_no") String cont_no, Model model) {
-//		bookingDTO bookDto = containDao.selectbookcont(cont_no);
-//		System.out.println(cont_no);
-//		System.out.println(bookDto);
-//		model.addAttribute("bookDto", bookDto);
-//		return "container/bookCont";
-//	} 구현 실패
-
 
 	@GetMapping("/detail")
 	public String conDetail(@RequestParam("cont_no") String cont_no, Model model) {

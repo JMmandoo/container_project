@@ -10,19 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpSession;
-import pack.model.DataDao;
 import pack.model.container.ContainDao;
 import pack.model.container.ContainDtoMap;
 // 재민
 @Controller
-public class ContainController {
+public class ContainMapController {
 	@Autowired
 	private ContainDao containDao;
 	
 	@GetMapping("conta")
 	@ResponseBody
-	public Map<String, Object> sangpumProcess(){
+	public Map<String, Object> containerProcess(){
 	List<Map<String, String>> list = new ArrayList<>();
 	Map<String, String> data = null;
 	
@@ -34,6 +32,7 @@ public class ContainController {
 		data.put("we", c.getCont_we());
 		data.put("kyung", c.getCont_kyung());
 		data.put("con_area", c.getCont_size());
+		data.put("cont_image", c.getCont_image());
 		list.add(data); //작업을 반복한다
 	}
 	System.out.println(list);
