@@ -41,14 +41,11 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - name: Build and push
-      env:
-        NAME: ${{ secrets.DOCKERHUB_USERNAME }}  # DockerHub 계정명
-        REPO: ${{ secrets.PROJECT_NAME }}       # 레포지토리 이름
-        run: |
-          docker build -t $REPO .
-          docker tag $REPO:latest $NAME/$REPO:latest
-          docker push $NAME/$REPO:latest
+    - name: Docker Image Build
+      run: docker build -f Dockerfile-dev -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME}} .
+
+    - name: DockerHub Push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
     - name: Application Run
       uses: appleboy/ssh-action@v0.1.6
