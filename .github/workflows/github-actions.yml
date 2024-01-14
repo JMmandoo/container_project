@@ -36,9 +36,13 @@ jobs:
 
       # Docker 이미지 빌드 및 태그 지정
       - name: Docker Image Build and Tag
+        env:
+          NAME: ${{ secrets.DOCKERHUB_USERNAME }}  # DockerHub 계정명
+          REPO: ${{ secrets.PROJECT_NAME }}       # 레포지토리 이름
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }} .
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}:latest ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}:latest
+          docker build -t $REPO .
+          docker tag $REPO:latest $NAME/$REPO:latest
+          docker push $NAME/$REPO:latest
 
       # Docker 이미지 푸시
       - name: DockerHub Push
