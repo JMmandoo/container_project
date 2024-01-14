@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM adoptopenjdk/openjdk17
 ARG JAR_FILE=*.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
