@@ -1,4 +1,4 @@
-name: Spring Boot & Gradle CI/CD
+name: github-actions
 
 # 어떤 이벤트가 발생하면 workflow 실행할 지 명시
 on:
