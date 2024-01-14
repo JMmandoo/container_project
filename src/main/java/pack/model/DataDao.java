@@ -113,7 +113,6 @@ public class DataDao {
        return containerDto;
    }
 
-   
    @Transactional  // detail.html에서 삭제버튼 누르면 삭제하도록 하기
       public boolean condelete(String cont_no) {
          boolean b = false;
@@ -130,26 +129,4 @@ public class DataDao {
          logger.info("datas4 : " + list4.size() + "개");
          return list4;
       }
-      
-     
-      /*
-      public List<ContainerDto> getreviews(){
-         List<ContainerDto> list6 = dataMapper.selectAll6();  // sql문이 실행
-         logger.info("datas6 : " + list6.size() + "개");
-         return list6;
-      }
-      */
-      
-      /*
-      // ajax
-       public void saveReviewAjax(ReviewDto reviewDto) {
-           dataMapper.insertReview(reviewDto);
-       }
-       
-       public List<ReviewDto> getAllReviews() {
-           List<ReviewDto> reviews = dataMapper.selectAllReviews();
-           logger.info("reviews : " + reviews.size() + "개");
-           return reviews;
-       }
-       */
 }
