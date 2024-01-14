@@ -1,5 +1,4 @@
 FROM openjdk:17-alpine
-
-COPY ./build/libs/warehouseProject-0.0.1-SNAPSHOT.jar app.jar
-
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} warehouseProject-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
