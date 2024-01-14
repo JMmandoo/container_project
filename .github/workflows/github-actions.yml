@@ -40,7 +40,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
+      # Docker 빌드 push
     - name: Docker Image Build
       run: docker build -f Dockerfile-dev -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME}} .
 
