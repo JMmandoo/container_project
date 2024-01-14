@@ -35,15 +35,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Docker 이미지 빌드 및 태그 지정
-      - name: Docker Image Build and Tag
-        uses: docker/build-push-action@v4
-        env:
-          NAME: ${{ secrets.DOCKERHUB_USERNAME }}  # DockerHub 계정명
-          REPO: ${{ secrets.PROJECT_NAME }}       # 레포지토리 이름
+      - name: Docker build
         run: |
-          docker build -t $REPO .
-          docker tag $REPO:latest $NAME/$REPO:latest
-          docker push $NAME/$REPO:latest
+          docker build -t issue-tracker .
+          docker tag issue-tracker ${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.PROJECT_NAME }}:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.PROJECT_NAME }}:latest
 
       # EC2에 SSH 접속 및 애플리케이션 실행
       - name: Application Run
