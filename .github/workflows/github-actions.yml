@@ -26,20 +26,18 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew clean build --exclude-task test
+          
+          ## docker compose up
+               - name: executing remote ssh commands using password
+               uses: docker/login-action@v2
+               with:
+                 username: ${{ secrets.DOCKERHUB_USERNAME }}
+                 script: |
+                   sudo docker rm -f $(docker ps -qa)
+                   sudo docker pull ${{ secrets.DOCKER_REPO }}/{{ secrets.PROJECT_NAME }}
+                   docker-compose up -d
+                   docker image prune -f 
 
-      # DockerHub 로그인
-      - name: DockerHub Login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      # Docker 이미지 빌드 및 태그 지정
-      - name: Docker build
-        run: |
-          docker build -t issue-tracker .
-          docker tag issue-tracker ${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.PROJECT_NAME }}:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.PROJECT_NAME }}:latest
 
       # EC2에 SSH 접속 및 애플리케이션 실행
       - name: Application Run
