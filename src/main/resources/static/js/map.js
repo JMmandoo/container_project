@@ -1,12 +1,12 @@
 // 지도 관련 변수 초기화
-var mapContainer = document.getElementById('map');
-var mapOption = {
+let mapContainer = document.getElementById('map');
+let mapOption = {
   center: new kakao.maps.LatLng(37.56692, 126.97845),
   level: 3,
   mapTypeId: kakao.maps.MapTypeId.ROADMAP
 };
-var map = new kakao.maps.Map(mapContainer, mapOption);
-var currentOverlay = null;
+let map = new kakao.maps.Map(mapContainer, mapOption);
+let currentOverlay = null;
 
 // 오버레이 관련 함수
 function closeOverlay() {
@@ -19,7 +19,7 @@ function closeOverlay() {
 function attachOverlay(marker, content) {
   kakao.maps.event.addListener(marker, 'click', function () {
     closeOverlay();
-    var overlay = new kakao.maps.CustomOverlay({
+    let overlay = new kakao.maps.CustomOverlay({
       content: content,
       map: map,
       position: marker.getPosition()
@@ -30,12 +30,12 @@ function attachOverlay(marker, content) {
 
 // 주소 검색 기능
 function searchAddress() {
-  var addressInput = document.getElementById('addressInput').value;
+  let addressInput = document.getElementById('addressInput').value;
   if (!addressInput) {
     alert('주소를 입력하세요.');
     return;
   }
-  var geocoder = new kakao.maps.services.Geocoder();
+  let geocoder = new kakao.maps.services.Geocoder();
   geocoder.addressSearch(addressInput, function (result, status) {
     if (status === kakao.maps.services.Status.OK && result.length > 0) {
       map.setCenter(new kakao.maps.LatLng(result[0].y, result[0].x));
@@ -47,21 +47,21 @@ function searchAddress() {
 
 // 지도 컨트롤 설정
 function setupMapControls() {
-  var mapTypeControl = new kakao.maps.MapTypeControl();
+  let mapTypeControl = new kakao.maps.MapTypeControl();
   map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-  var zoomControl = new kakao.maps.ZoomControl();
+  let zoomControl = new kakao.maps.ZoomControl();
   map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 }
 
 // 마커 이미지 설정
-var imageSrc = '/assets/img/team/storage.png';
-var imageSize = new kakao.maps.Size(40, 45);
-var imageOption = {offset: new kakao.maps.Point(27, 69)};
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+let imageSrc = '/assets/img/team/storage.png';
+let imageSize = new kakao.maps.Size(40, 45);
+let imageOption = {offset: new kakao.maps.Point(27, 69)};
+let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
 // 마커 클러스터러 설정
-var clusterer = new kakao.maps.MarkerClusterer({
+let clusterer = new kakao.maps.MarkerClusterer({
   map: map,
   averageCenter: true,
   minLevel: 5
@@ -69,19 +69,19 @@ var clusterer = new kakao.maps.MarkerClusterer({
 
 // 데이터 로드 및 마커 생성
 function loadData() {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", "/conta", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText).datas;
+      let data = JSON.parse(xhr.responseText).datas;
       data.forEach(function (item) {
-        var marker = new kakao.maps.Marker({
+        let marker = new kakao.maps.Marker({
           position: new kakao.maps.LatLng(item.we, item.kyung),
           map: map,
           image: markerImage
         });
 
-        var content = '<div class="wrap">' +
+        let content = '<div class="wrap">' +
             '    <div class="info">' +
             '        <div class="title">' +
             '            창고 정보' +  // 제목을 변경
@@ -112,13 +112,13 @@ function loadData() {
 
 // 창고 예약 팝업 열기
 function openPopup(conNo) {
-  var encodedConNo = encodeURIComponent(conNo);
-  var url = 'booking/booking?con_no=' + encodedConNo;
+  let encodedConNo = encodeURIComponent(conNo);
+  let url = 'booking/booking?con_no=' + encodedConNo;
   window.open(url, '_blank', 'width=1000, height=800');
 }
 
 // 교통 정보 표시 기능
-var trafficShown = false;
+let trafficShown = false;
 
 function toggleTraffic() {
   if (trafficShown) {
