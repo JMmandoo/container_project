@@ -69,7 +69,8 @@ GOOGLE geocoding API
 ![image](https://github.com/JMmandoo/container_project/assets/139545432/78ce7e40-854f-41de-bb44-90d29853e95b)
 
 **프로젝트 아키택쳐**<br/>
-![image](https://github.com/JMmandoo/container_project/assets/139545432/13dcd1db-db64-4054-97d1-1b86201622ef)
+![image](https://github.com/JMmandoo/container_project/assets/139545432/48ac4a81-f27f-4f0b-885d-79688f9b5359)
+
 
 
 
