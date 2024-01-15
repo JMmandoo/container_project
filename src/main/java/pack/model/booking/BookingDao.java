@@ -15,51 +15,56 @@ public class BookingDao {
 	@Autowired
 	private BookingMapperInter bookingMapperInter;
 
+
 	@Transactional
 	public boolean bookingInsert(bookingDTO bookingdto) {
-		boolean insertSuccess = false;
+		boolean b = false;
 		try {
-			int insertCount = bookingMapperInter.bookingInsert(bookingdto);
-			if (insertCount > 0) {
-				insertSuccess = true;
+			int re = bookingMapperInter.bookingInsert(bookingdto);
+			if (re > 0) {
+				b = true;
 			}
 
 		} catch (Exception e) {
-			System.out.println("예외 발생: " + e.getMessage());
-			// 로그 기록 또는 추가 예외 처리
+			// TODO: handle exception
 		}
-		return insertSuccess;
+		return b;
 	}
+	// 10/3 민혁 창고예약에 따른 상태변경
 
-	@Transactional // 성공하면 커밋, 실패하면 롤백
+	@Transactional // 성공하면 커밋 실패하면 롤백
 	public boolean contStatusUpdate(AdminBean adminbean) {
-		boolean updateSuccess = false;
+		boolean a = false;
 		System.out.println("상태 업데이트 메서드 시작");
 		try {
-			int updateCount = bookingMapperInter.contStatusUpdate(adminbean);
-			System.out.println("SQL 실행 결과: " + updateCount);
-			if (updateCount > 0)
-				updateSuccess = true;
+			int re = bookingMapperInter.contStatusUpdate(adminbean);
+			System.out.println("SQL 실행 결과: " + re);
+			if (re > 0)
+				a = true;
 		} catch (Exception e) {
+			// 예외 발생 시 처리
 			System.out.println("예외 발생: " + e.getMessage());
-			// 로그 기록 또는 추가 예외 처리
-			updateSuccess = false;
+			a = false;
 		}
-		return updateSuccess;
+		return a;
 	}
 
-	public ArrayList<bookingDTO> bookingListAll(String userId){
-		ArrayList<bookingDTO> bookingList = (ArrayList<bookingDTO>)bookingMapperInter.bookingList(userId);
-		System.out.println("user_id : " + userId);
-		return bookingList;
+
+
+	public ArrayList<bookingDTO> bookingListAll(String user_id){
+		ArrayList<bookingDTO> blist = (ArrayList<bookingDTO>)bookingMapperInter.bookingList(user_id);
+		System.out.println("user_id : " + user_id);
+		return blist;
 	}
 
 	// 예약 삭제 bookingInfo 취소하기
 	public boolean bookingDelete(bookingDTO bookingdto) {
-		boolean deleteSuccess = false;
-		int deleteCount = bookingMapperInter.bookingDelete(bookingdto);
-		if(deleteCount >= 0 ) deleteSuccess = true;
-		return deleteSuccess;
+		boolean b = false;
+		int re = bookingMapperInter.bookingDelete(bookingdto);
+		if(re >= 0 ) b = true;
+		return b;
 	}
-}
 
+
+
+}

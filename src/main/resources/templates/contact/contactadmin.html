@@ -2,11 +2,11 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <head>
-   <meta charset="UTF-8">
-   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-   <title>Contact</title>
-   
-   <!-- 파비콘 -->
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Contact</title>
+
+  <!-- 파비콘 -->
   <link href="/assets/img/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
@@ -24,86 +24,92 @@
 </head>
 
 <body>
+<div th:if="${session.userSession != null}">
+  <div th:if="${session.adminSession != null}">
+    <!-- ======= Header ======= -->
+    <div th:replace="~{fragments/header_admin :: header}"></div>
 
-<div th:if="${session.adminSession != null}">
-  <!-- ======= Header ======= -->
-  <div th:replace="~{fragments/header_admin :: header}"></div>
+    <main id="main">
 
-  <main id="main">
+      <!-- ======= Breadcrumbs ======= -->
+      <div class="breadcrumbs d-flex align-items-center"
+           style="background-image: url('/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+          <h2 style="font-family: 'Noto Sans KR';">공지사항</h2>
+          <ol>
+            <li><a href="/adminsessionkeep">Home</a></li>
+            <li>게시판</li>
+          </ol>
+        </div>
+      </div><!-- End Breadcrumbs -->
+      <section>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/assets/img/breadcrumbs-bg.jpg');">
-      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
-        <h2 style="font-family: 'Noto Sans KR';">공지사항</h2>
-        <ol>
-          <li><a href="/adminsessionkeep">Home</a></li>
-          <li>게시판</li>
-        </ol>
-      </div>
-    </div><!-- End Breadcrumbs -->  
-   <section>   
+        <div class="board-container">
 
-      <div class="board-container">
-         
-   <h3 style="padding-top: 1cm; padding-bottom: 1cm; text-align: center;">Contact 목록</h3>
-   <table border="1">
-      <tr>
-         <th>이름</th><th>메일</th><th>주제</th><th>문의날짜</th><th>처리상태</th><th>상세보기</th>
-      </tr>
-      <th:block th:if="${contactadmin.size > 0}">
-         <tr th:each="data:${contactadmin}">
-            <td th:text="${data.contact_name }"></td>
-            <td th:text="${data.contact_email }"></td>
-            <td th:text="${data.contact_title }"></td>
-            <td th:text="${data.contact_date }"></td>
-            <td th:text="${data.contact_status }"></td>
-            <td>
-               <a th:href="@{/contactdetail(contact_no=${data.contact_no})}">상세보기</a>
-            </td>
-         </tr>
-      </th:block>
-   </table>
-   <table style="margin-top: 20px;">
-      <tr style="text-align: center;">
-         <td colspan="5">
-            <th:block th:each="num : ${#numbers.sequence(1, pagesu)}">
-               <th:span th:if="${num == page}">
-                  <b th:text="${num}">num 표시(현재 페이지는 링크를 걸지 않음)</b>
-               </th:span>
-               <th:span th:if="${num != page}">
-                  <a th:href="@{/contactadmin(page=${num})}" th:text="${num}">num 표시</a>
-               </th:span>
+          <h3 style="padding-top: 1cm; padding-bottom: 1cm; text-align: center;">Contact 목록</h3>
+          <table border="1">
+            <tr>
+              <th>이름</th>
+              <th>메일</th>
+              <th>주제</th>
+              <th>문의날짜</th>
+              <th>처리상태</th>
+              <th>상세보기</th>
+            </tr>
+            <th:block th:if="${contactadmin.size > 0}">
+              <tr th:each="data:${contactadmin}">
+                <td th:text="${data.contact_name }"></td>
+                <td th:text="${data.contact_email }"></td>
+                <td th:text="${data.contact_title }"></td>
+                <td th:text="${data.contact_date }"></td>
+                <td th:text="${data.contact_status }"></td>
+                <td>
+                  <a th:href="@{/contactdetail(contact_no=${data.contact_no})}">상세보기</a>
+                </td>
+              </tr>
             </th:block>
-         </td>
-      </tr>
-   </table>
-   </div>
-   </section>
+          </table>
+          <table style="margin-top: 20px;">
+            <tr style="text-align: center;">
+              <td colspan="5">
+                <th:block th:each="num : ${#numbers.sequence(1, pagesu)}">
+                  <th:span th:if="${num == page}">
+                    <b th:text="${num}">num 표시(현재 페이지는 링크를 걸지 않음)</b>
+                  </th:span>
+                  <th:span th:if="${num != page}">
+                    <a th:href="@{/contactadmin(page=${num})}" th:text="${num}">num 표시</a>
+                  </th:span>
+                </th:block>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
 
-  </main><!-- End #main -->
-  
-  <!-- ======= Footer ======= -->
-  <div th:replace="~{fragments/footer :: footer}"></div>
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
 
 
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-  <div id="preloader"></div>
+    <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/aos/aos.js"></script>
-  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="/assets/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/js/main.js"></script>
+  </div>
 </div>
-
 </body>
 
 </html>

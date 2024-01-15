@@ -11,20 +11,21 @@ public class OwnerService {
   @Autowired
   private OwnerDao ownerDao;
 
-  public boolean registerOwner(OwnerDto ownerDto) {
+  public boolean ownerInsertData(OwnerDto ownerDto) {
     return ownerDao.ownerinsertData(ownerDto);
   }
 
-  public OwnerDto loginOwner(String businessNum, String password) {
-    return ownerDao.ownerloginProcess(businessNum, password);
+  public OwnerDto ownerLoginProcess(String business_num, String owner_pwd) {
+    return ownerDao.ownerloginProcess(business_num, owner_pwd);
   }
 
-  public boolean updateOwner(OwnerDto ownerDto) {
+  public boolean ownerUpdate(OwnerDto ownerDto) {
     return ownerDao.ownerupdate(ownerDto);
   }
 
-  public boolean deleteOwner(OwnerDto ownerDto) {
+  public boolean ownerDelete(OwnerDto ownerDto) {
     return ownerDao.ownerdelete(ownerDto);
   }
-}
 
+  // 여기에 필요한 다른 메소드들을 추가할 수 있습니다.
+}

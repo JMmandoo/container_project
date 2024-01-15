@@ -53,10 +53,8 @@ public class AdminController {
 	public String adminSessionKeep(HttpSession session) {
 		AdminDto adminSession = (AdminDto) session.getAttribute("adminSession");
 	    if (adminSession != null) {
-	        // 세션에 ownerSession값이 존재할 경우 ownermain.html 페이지로 이동
 	        return "admin/adminloginok"; 
 	    } else {
-	    	// 세션값이 없을 경우
 	    	return "../templates/index";
 	    }
 	}
