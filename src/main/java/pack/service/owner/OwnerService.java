@@ -1,30 +1,14 @@
 package pack.service.owner;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import pack.model.owner.OwnerDao;
 import pack.model.owner.OwnerDto;
 
-@Service
-public class OwnerService {
+public interface OwnerService {
 
-  @Autowired
-  private OwnerDao ownerDao;
+  boolean ownerInsertData(OwnerDto ownerDto);
 
-  public boolean ownerInsertData(OwnerDto ownerDto) {
-    return ownerDao.ownerinsertData(ownerDto);
-  }
+  OwnerDto ownerLoginProcess(String businessNum, String ownerPwd);
 
-  public OwnerDto ownerLoginProcess(String business_num, String owner_pwd) {
-    return ownerDao.ownerloginProcess(business_num, owner_pwd);
-  }
+  boolean ownerUpdate(OwnerDto ownerDto);
 
-  public boolean ownerUpdate(OwnerDto ownerDto) {
-    return ownerDao.ownerupdate(ownerDto);
-  }
-
-  public boolean ownerDelete(OwnerDto ownerDto) {
-    return ownerDao.ownerdelete(ownerDto);
-  }
-
+  boolean ownerDelete(OwnerDto ownerDto);
 }
