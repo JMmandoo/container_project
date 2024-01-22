@@ -173,8 +173,7 @@ public class ContainerController {
     try {
       inputStream = file.getInputStream();
 
-      // 프로젝트 루트 기준으로 파일 저장 경로 설정
-      String fileSavePath = "src/main/resources/static/upload/" + randomFilename;
+      String fileSavePath = "/var/app/uploads/" + randomFilename; // EC2 인스턴스 내의 경로
 
       File newFile = new File(fileSavePath);
       if (!newFile.getParentFile().exists()) {
@@ -187,7 +186,7 @@ public class ContainerController {
       while ((read = inputStream.read(bytes)) != -1) {
         outputStream.write(bytes, 0, read);
       }
-      bean.setCont_image(randomFilename);
+      bean.setCont_image(fileSavePath);
 
     } catch (Exception e) {
       System.out.println("file submit err : " + e);
