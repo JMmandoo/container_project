@@ -167,13 +167,14 @@ public class ContainerController {
 
     // 작성자가 업로드한 파일명 > 서버 내부에서 관리하는 파일명
     if (result.hasErrors()) { // 에러가 있으면 트루야
-      return "errorFile"; // 에러발생 (파일을 선택하지 않은 경우)시 수행
+      return "container/errorFile"; // 에러발생 (파일을 선택하지 않은 경우)시 수행
     }
 
     try {
       inputStream = file.getInputStream();
 
-      String fileSavePath = "/var/app/uploads/" + randomFilename; // EC2 인스턴스 내의 경로
+      // 프로젝트 루트 기준으로 파일 저장 경로 설정
+      String fileSavePath = "static/upload/" + randomFilename;
 
       File newFile = new File(fileSavePath);
       if (!newFile.getParentFile().exists()) {
@@ -186,7 +187,7 @@ public class ContainerController {
       while ((read = inputStream.read(bytes)) != -1) {
         outputStream.write(bytes, 0, read);
       }
-      bean.setCont_image(fileSavePath);
+      bean.setCont_image(randomFilename);
 
     } catch (Exception e) {
       System.out.println("file submit err : " + e);
