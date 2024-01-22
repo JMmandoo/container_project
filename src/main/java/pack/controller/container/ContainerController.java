@@ -160,7 +160,7 @@ public class ContainerController {
     // 파일명에 랜덤 문자열을 추가하여 새 파일명 생성
     if (originalFilename != null && !originalFilename.isEmpty()) {
       // 파일명에 기존 파일명과 랜덤 값을 결합합니다.
-      randomFilename = originalFilename.substring(0, originalFilename.lastIndexOf('.')) + "_" + randomFilename + fileExtension;
+      randomFilename = originalFilename.substring(0, originalFilename.lastIndexOf('.')) + "-" + randomFilename + fileExtension;
     } else {
       randomFilename += fileExtension;
     }
