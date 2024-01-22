@@ -174,7 +174,7 @@ public class ContainerController {
       inputStream = file.getInputStream();
 
       // 프로젝트 루트 기준으로 파일 저장 경로 설정
-      String fileSavePath = "src/main/resources/static/upload/" + randomFilename;
+      String fileSavePath = "/path/to/pro/actual/upload/directory/" + randomFilename;
 
       File newFile = new File(fileSavePath);
       if (!newFile.getParentFile().exists()) {
